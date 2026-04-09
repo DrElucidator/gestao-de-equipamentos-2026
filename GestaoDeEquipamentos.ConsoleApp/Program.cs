@@ -1,4 +1,5 @@
-﻿while (true)
+﻿Equipamento[] equipamentos = new Equipamento[100];
+while (true)
 {
     Console.Clear();
     Console.WriteLine("---------------------------------");
@@ -21,13 +22,7 @@
 
     if (opcaoMenu == "1")
     {
-        /*
-        • Deve ter identificador único (id)
-        • Deve ter um nome com no mínimo 6 caracteres;
-        • Deve ter um preço de aquisição;
-        • Deve ter uma fabricante;
-        • Deve ter uma data de fabricação;
-        */
+
     }
 
     else if (opcaoMenu == "2")
