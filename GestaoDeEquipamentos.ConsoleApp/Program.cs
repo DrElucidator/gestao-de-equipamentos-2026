@@ -43,8 +43,8 @@ while (true)
         
         do
         {
-            Console.Write("Digite o nome do equipamento");
-            novoEquipamento.nome = Console.ReadLine();
+            Console.Write("Digite o fabricante do equipamento: ");
+            novoEquipamento.fabricante = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(novoEquipamento.fabricante) && novoEquipamento.fabricante.Length > 2)
             {
                 break;              
