@@ -1,4 +1,7 @@
-﻿Equipamento[] equipamentos = new Equipamento[100];
+﻿using GestaoDeEquipamentos.ConsoleApp;
+
+Equipamento[] equipamentos = new Equipamento[100];
+
 while (true)
 {
     Console.Clear();
@@ -22,7 +25,48 @@ while (true)
 
     if (opcaoMenu == "1")
     {
+        Console.Clear();
+        Console.WriteLine("\nGestão de Equipamentos\n");
+        Console.WriteLine("Cadastro de Equipamento\n");
 
+        Equipamento novoEquipamento = new Equipamento();
+        
+        do
+        {
+            Console.Write("Digite o nome do equipamento");
+            novoEquipamento.nome = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(novoEquipamento.nome) && novoEquipamento.nome.Length > 3)
+            {
+                break;              
+            }
+        } while (true);
+        
+        do
+        {
+            Console.Write("Digite o nome do equipamento");
+            novoEquipamento.nome = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(novoEquipamento.fabricante) && novoEquipamento.fabricante.Length > 2)
+            {
+                break;              
+            }
+        } while (true);
+        
+        Console.WriteLine("Digite o preço de aquisição do equipamento: ");
+        novoEquipamento.precoAquisicao = Convert.ToDecimal(Console.ReadLine());
+        
+        Console.Write("Digite a data de fabricação do equipamento: ");
+        novoEquipamento.dataFabricacao = Convert.ToDateTime(Console.ReadLine());
+
+        for(int i = 0; i < equipamentos.Length; i++)
+        {
+            Equipamento? e = equipamentos[i];
+
+            if(e == null)
+            {
+                equipamentos[i] = novoEquipamento;
+                break;
+            }
+        }
     }
 
     else if (opcaoMenu == "2")
