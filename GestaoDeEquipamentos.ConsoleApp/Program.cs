@@ -1,12 +1,4 @@
-﻿using System.Security.Cryptography;
-
-string id = Convert.ToHexString(RandomNumberGenerator.GetBytes(20))
-    .ToLower()
-    .Substring(0, 7);
-
-Console.WriteLine(id);
-
-while (true)
+﻿while (true)
 {
     Console.Clear();
     Console.WriteLine("---------------------------------");
