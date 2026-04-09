@@ -1,6 +1,6 @@
 ﻿using GestaoDeEquipamentos.ConsoleApp;
 
-Equipamento[] equipamentos = new Equipamento[100];
+Equipamento?[] equipamentos = new Equipamento[100];
 
 while (true)
 {
@@ -67,6 +67,10 @@ while (true)
                 break;
             }
         }
+
+        Console.WriteLine($"\nO registro \"{novoEquipamento}\" foi registrado com sucesso.\n");
+        Console.WriteLine("Pressione ENTER para continuar...");
+        Console.ReadLine();
     }
 
     else if (opcaoMenu == "2")
