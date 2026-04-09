@@ -1,4 +1,5 @@
-﻿using GestaoDeEquipamentos.ConsoleApp;
+﻿using System.Security.Cryptography;
+using GestaoDeEquipamentos.ConsoleApp;
 
 Equipamento?[] equipamentos = new Equipamento[100];
 
@@ -30,38 +31,43 @@ while (true)
         Console.WriteLine("Cadastro de Equipamento\n");
 
         Equipamento novoEquipamento = new Equipamento();
-        
+
         do
         {
-            Console.Write("Digite o nome do equipamento");
+            Console.Write("Digite o nome do equipamento: ");
             novoEquipamento.nome = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(novoEquipamento.nome) && novoEquipamento.nome.Length > 3)
             {
-                break;              
+                break;
             }
         } while (true);
-        
+
         do
         {
             Console.Write("Digite o fabricante do equipamento: ");
             novoEquipamento.fabricante = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(novoEquipamento.fabricante) && novoEquipamento.fabricante.Length > 2)
             {
-                break;              
+                break;
             }
         } while (true);
-        
+
         Console.WriteLine("Digite o preço de aquisição do equipamento: ");
         novoEquipamento.precoAquisicao = Convert.ToDecimal(Console.ReadLine());
-        
+
         Console.Write("Digite a data de fabricação do equipamento: ");
         novoEquipamento.dataFabricacao = Convert.ToDateTime(Console.ReadLine());
 
-        for(int i = 0; i < equipamentos.Length; i++)
+        novoEquipamento.id = Convert
+            .ToHexString(RandomNumberGenerator.GetBytes(20))
+            .ToLower()
+            .Substring(0, 7);
+
+        for (int i = 0; i < equipamentos.Length; i++)
         {
             Equipamento? e = equipamentos[i];
 
-            if(e == null)
+            if (e == null)
             {
                 equipamentos[i] = novoEquipamento;
                 break;
@@ -75,7 +81,29 @@ while (true)
 
     else if (opcaoMenu == "2")
     {
+        Console.Clear();
+        Console.WriteLine("\nGestão de equipamentos\n");
+        Console.WriteLine("Edição de equipamento\n");
 
+        Console.WriteLine(
+            "{0, -7} | {1, -15} | {2, -15} | {3, -22} | {4, -10}",
+            "id", "fabricante", "preço de aquisição", "data de fabricação"
+        );
+
+        for (int i = 0; i < equipamentos.Length; i++)
+        {
+            Equipamento? e = equipamentos[i];
+            if (e == null)
+                continue;
+
+            Console.WriteLine(
+                "{0, -7} | {1, -15} | {2, -15} | {3, -22} | {4, -10}",
+                e.id, e.fabricante, e.precoAquisicao.ToString("C2"), e.dataFabricacao.ToShortDateString()
+            );
+        }
+
+        Console.WriteLine("Digite o id do equipamento que deseja editar: ");
+        Console.ReadLine();
     }
 
     else if (opcaoMenu == "3")
