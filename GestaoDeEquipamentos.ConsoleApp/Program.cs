@@ -45,7 +45,25 @@ while (true)
         }
         else if (opcaoMenuPrincipal == "2")
         {
+            string? opcaoMenu = telaChamado.ObterEscolhaMenuPrincipal();
 
+            if (opcaoMenu == "S")
+            {
+                Console.Clear();
+                break;
+            }
+
+            if (opcaoMenu == "1")
+                telaChamado.Cadastrar();
+
+            else if (opcaoMenu == "2")
+                telaChamado.Editar();
+
+            else if (opcaoMenu == "3")
+                telaChamado.Excluir();
+
+            else if (opcaoMenu == "4")
+                telaChamado.VisualizarTodos();
         }
     }
 }

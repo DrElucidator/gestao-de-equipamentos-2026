@@ -1,6 +1,10 @@
+using GestaoDeEquipamentos.ConsoleApp.Dominio;
+using GestaoDeEquipamentos.ConsoleApp.Infraestrutura;
 namespace GestaoDeEquipamentos.ConsoleApp.Apresentacao;
+
 public class TelaChamado
 {
+    public RepositorioEquipamento repositorioEquipamento = new RepositorioEquipamento();
     public string? ObterEscolhaMenuPrincipal()
     {
         Console.Clear();
@@ -17,18 +21,95 @@ public class TelaChamado
     }
     public void Cadastrar()
     {
-        
+        Console.Clear();
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine("Gestão de Chamados");
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine("Cadastro de chamado");
+        Console.WriteLine("---------------------------------");
+
+        Console.WriteLine(
+            "{0, -7} | {1, -15} | {2, -15} | {3, -22} | {4, -10}",
+            "Id", "Nome", "Fabricante", "Preço de Aquisição", "Data de Fabricação"
+        );
+
+        Equipamento?[] equipamentos = repositorioEquipamento.SelecionarTodos();
+
+        for (int i = 0; i < equipamentos.Length; i++)
+        {
+            Equipamento? e = equipamentos[i];
+
+            if (e == null)
+                continue;
+
+            Console.WriteLine(
+                "{0, -7} | {1, -15} | {2, -15} | {3, -22} | {4, -10}",
+                e.id, e.nome, e.fabricante, e.precoAquisicao.ToString("C2"), e.dataFabricacao.ToShortDateString()
+            );
+        }
+
+        Console.WriteLine("---------------------------------");
+
+        string? idSelecionado;
+
+        do
+        {
+            Console.Write("Digite o id do equipamento que deseja selecionar: ");
+            idSelecionado = Console.ReadLine();
+
+            if (!string.IsNullOrWhiteSpace(idSelecionado) && idSelecionado.Length == 7)
+                break;
+        } while (true);
+
+        Equipamento? equipamentoSelecionado = repositorioEquipamento.SelecionarPorId(idSelecionado);
+
+        if (equipamentoSelecionado == null)
+        {
+            Console.WriteLine("---------------------------------");
+            Console.WriteLine($"Não foi possível encontrar o equipamento informado.");
+            Console.WriteLine("---------------------------------");
+            Console.WriteLine("Digite ENTER para continuar...");
+            Console.ReadLine();
+            return;
+        }
+
+        Chamado novoChamado = new Chamado();
+
+        novoChamado.equipamento = equipamentoSelecionado;
+
+        do
+        {
+            Console.Write("Digite o título do chamado: ");
+            novoChamado.titulo = Console.ReadLine();
+
+            if (!string.IsNullOrWhiteSpace(novoChamado.titulo) &&
+                novoChamado.titulo.Length >= 3)
+            {
+                break;
+            }
+
+        } while (true);
+        Console.Write("Digite a descrição do chamado: ");
+        novoChamado.descricao = Console.ReadLine();
+
+        novoChamado.dataAbertura = DateTime.Now;
+
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine($"O registro \"{novoChamado.id}\" foi cadastrado com sucesso.");
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine("Digite ENTER para continuar...");
+        Console.ReadLine();
     }
     public void Editar()
     {
-        
+
     }
     public void Excluir()
     {
-        
+
     }
     public void VisualizarTodos()
     {
-        
+
     }
 }

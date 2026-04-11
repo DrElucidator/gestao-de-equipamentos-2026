@@ -39,7 +39,7 @@ public class TelaEquipamento
             novoEquipamento.nome = Console.ReadLine();
 
             if (!string.IsNullOrWhiteSpace(novoEquipamento.nome) &&
-                novoEquipamento.nome.Length > 3)
+                novoEquipamento.nome.Length >= 3)
             {
                 break;
             }
@@ -124,7 +124,7 @@ public class TelaEquipamento
             novoEquipamento.nome = Console.ReadLine();
 
             if (!string.IsNullOrWhiteSpace(novoEquipamento.nome) &&
-                novoEquipamento.nome.Length > 3)
+                novoEquipamento.nome.Length >= 3)
             {
                 break;
             }
@@ -137,7 +137,7 @@ public class TelaEquipamento
             novoEquipamento.fabricante = Console.ReadLine();
 
             if (!string.IsNullOrWhiteSpace(novoEquipamento.fabricante) &&
-                novoEquipamento.fabricante.Length > 2)
+                novoEquipamento.fabricante.Length >= 2)
             {
                 break;
             }
