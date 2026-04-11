@@ -1,7 +1,15 @@
 ﻿﻿using GestaoDeEquipamentos.ConsoleApp.Apresentacao;
+using GestaoDeEquipamentos.ConsoleApp.Infraestrutura;
+
+RepositorioEquipamento repositorioEquipamento = new RepositorioEquipamento();
+RepositorioChamado repositorioChamado = new RepositorioChamado();
 
 TelaEquipamento telaEquipamento = new TelaEquipamento();
+telaEquipamento.repositorio = repositorioEquipamento;
+
 TelaChamado telaChamado = new TelaChamado();
+telaChamado.repositorioChamado = repositorioChamado;
+telaChamado.repositorioEquipamento = repositorioEquipamento;
 
 while (true)
 {

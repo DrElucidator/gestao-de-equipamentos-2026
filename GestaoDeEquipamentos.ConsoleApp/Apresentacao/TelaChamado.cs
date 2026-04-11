@@ -4,6 +4,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.Apresentacao;
 
 public class TelaChamado
 {
+    public RepositorioChamado repositorioChamado = new RepositorioChamado();
     public RepositorioEquipamento repositorioEquipamento = new RepositorioEquipamento();
     public string? ObterEscolhaMenuPrincipal()
     {
@@ -93,6 +94,8 @@ public class TelaChamado
         novoChamado.descricao = Console.ReadLine();
 
         novoChamado.dataAbertura = DateTime.Now;
+
+        repositorioChamado.Cadastrar(novoChamado);
 
         Console.WriteLine("---------------------------------");
         Console.WriteLine($"O registro \"{novoChamado.id}\" foi cadastrado com sucesso.");
