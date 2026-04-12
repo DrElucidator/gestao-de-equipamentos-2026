@@ -23,4 +23,9 @@ public class RepositorioChamado
             }
         }
     }
+
+    public Chamado?[] SelecionarTodos()
+    {
+        return chamados;
+    }
 }
