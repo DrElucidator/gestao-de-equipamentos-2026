@@ -222,7 +222,7 @@ public class TelaEquipamento
         else
         {
             Console.WriteLine("---------------------------------");
-            Console.WriteLine($"Não foi possível encontar o registro \"{idSelecionado}\".");
+            Console.WriteLine($"Não foi possível encontrar o registro \"{idSelecionado}\".");
             Console.WriteLine("---------------------------------");
         }
 

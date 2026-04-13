@@ -1,3 +1,4 @@
+using System.Data.Common;
 using System.Security.Cryptography;
 using GestaoDeEquipamentos.ConsoleApp.Dominio;
 namespace GestaoDeEquipamentos.ConsoleApp.Infraestrutura;

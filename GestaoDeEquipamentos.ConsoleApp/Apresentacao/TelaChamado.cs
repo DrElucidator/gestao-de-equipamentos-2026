@@ -1,3 +1,4 @@
+using System.Net;
 using GestaoDeEquipamentos.ConsoleApp.Dominio;
 using GestaoDeEquipamentos.ConsoleApp.Infraestrutura;
 namespace GestaoDeEquipamentos.ConsoleApp.Apresentacao;
@@ -281,7 +282,37 @@ public class TelaChamado
         }
 
         Console.WriteLine("---------------------------------");
+        Console.Write("Deseja visualizar a descrição de algum chamado? (S/N): ");
+        string? verDescricao = Console.ReadLine()?.ToUpper();
+
+        if (verDescricao == "S")
+        {
+            ExibirDescricao();
+        }
+
         Console.Write("Digite ENTER para continuar...");
         Console.ReadLine();
+    }
+
+    public void ExibirDescricao()
+    {
+        Console.Write("Digite o id do chamado para visualizar a descrição: ");
+        string? idSelecionado = Console.ReadLine();
+
+        Chamado? chamado = repositorioChamado.SelecionarPorId(idSelecionado);
+
+        if (chamado != null)
+        {
+            Console.WriteLine("---------------------------------");
+            Console.WriteLine($"Descrição do chamado {chamado.id}:");
+            Console.WriteLine(chamado.descricao);
+            Console.WriteLine("---------------------------------");
+        }
+        else
+        {
+            Console.WriteLine("---------------------------------");
+            Console.WriteLine("Chamado não encontrado.");
+            Console.WriteLine("---------------------------------");
+        }
     }
 }
