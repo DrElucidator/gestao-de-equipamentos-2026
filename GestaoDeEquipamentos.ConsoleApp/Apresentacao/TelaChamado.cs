@@ -105,7 +105,91 @@ public class TelaChamado
     }
     public void Editar()
     {
+        Console.Clear();
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine("Gestão de Chamados");
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine("Edição de Chamados");
+        Console.WriteLine("---------------------------------");
 
+        Console.WriteLine(
+            "{0, -7} | {1, -30} | {2, -15} | {3, -22} | {4, -10}",
+            "Id", "Título", "Equipamento", "Data de Abertura", "Dias desde abertura"
+        );
+
+        Chamado?[] chamados = repositorioChamado.SelecionarTodos();
+
+        for (int i = 0; i < chamados.Length; i++)
+        {
+            Chamado? c = chamados[i];
+
+            if (c == null)
+                continue;
+
+            Console.WriteLine(
+                "{0, -7} | {1, -30} | {2, -15} | {3, -22} | {4, -10}",
+                c.id, c.titulo, c.equipamento.nome, c.dataAbertura.ToShortDateString(), c.ObterDiasDecorridos()
+            );
+        }
+
+        Console.WriteLine("---------------------------------");
+
+        string? idSelecionado;
+
+        do
+        {
+            Console.Write("Digite o id do chamado que deseja editar: ");
+            idSelecionado = Console.ReadLine();
+
+            if (!string.IsNullOrWhiteSpace(idSelecionado) && idSelecionado.Length == 7)
+                break;
+        } while (true);
+
+        Chamado novoChamado = new Chamado();
+
+        do
+        {
+            Console.Write("Digite o título do chamado: ");
+            novoChamado.titulo = Console.ReadLine();
+
+            if (!string.IsNullOrWhiteSpace(novoChamado.titulo) &&
+                novoChamado.titulo.Length >= 3)
+            {
+                break;
+            }
+
+        } while (true);
+
+        do
+        {
+            Console.Write("Digite a nova descrição do chamado: ");
+            novoChamado.descricao = Console.ReadLine();
+
+            if (!string.IsNullOrWhiteSpace(novoChamado.descricao) &&
+                novoChamado.descricao.Length >= 2)
+            {
+                break;
+            }
+
+        } while (true);
+
+        bool conseguiuEditar = repositorioChamado.Editar(idSelecionado, novoChamado);
+
+        if (!conseguiuEditar)
+        {
+            Console.WriteLine("---------------------------------");
+            Console.WriteLine($"Não foi possível encontrar o chamado informado.");
+            Console.WriteLine("---------------------------------");
+            Console.WriteLine("Digite ENTER para continuar...");
+            Console.ReadLine();
+            return;
+        }
+
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine($"O registro \"{idSelecionado}\" foi editado com sucesso.");
+        Console.WriteLine("---------------------------------");
+        Console.WriteLine("Digite ENTER para continuar...");
+        Console.ReadLine();
     }
     public void Excluir()
     {

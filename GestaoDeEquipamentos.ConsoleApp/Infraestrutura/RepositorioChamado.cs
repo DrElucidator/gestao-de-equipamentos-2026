@@ -32,7 +32,6 @@ public class RepositorioChamado
 
         chamadoSelecionado.titulo = novoChamado.titulo;
         chamadoSelecionado.descricao = novoChamado.descricao;
-        chamadoSelecionado.dataAbertura = novoChamado.dataAbertura;
 
         return true;
     }
