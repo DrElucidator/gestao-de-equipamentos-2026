@@ -7,6 +7,31 @@ namespace GestaoDeEquipamentos.ConsoleApp.Infraestrutura;
 public class RepositorioEquipamento
 {
     public Equipamento?[] equipamentos = new Equipamento[100];
+    private const string caminhoArquivo = "listaEquipamentos";
+
+    public void CarregarEquipamentos()
+    {
+        List<Equipamento> equipamentosSalvos = RepositorioFabricante.Carregar<Equipamento>(caminhoArquivo);
+
+        for (int i = 0; i < equipamentos.Length; i++)
+            equipamentos[i] = null;
+
+        for (int i = 0; i < equipamentosSalvos.Count && i < equipamentos.Length; i++)
+            equipamentos[i] = equipamentosSalvos[i];
+    }
+
+    public void SalvarEquipamentos()
+    {
+        List<Equipamento> lista = new List<Equipamento>();
+
+        for (int i = 0; i < equipamentos.Length; i++)
+        {
+            if (equipamentos[i] != null)
+                lista.Add(equipamentos[i]!);
+        }
+
+        RepositorioFabricante.Salvar(caminhoArquivo, lista);
+    }
 
     public void Cadastrar(Equipamento novoEquipamento)
     {
@@ -35,7 +60,7 @@ public class RepositorioEquipamento
             return false;
 
         equipamentoSelecionado.nome = novoEquipamento.nome;
-        equipamentoSelecionado.fabricante = novoEquipamento.fabricante;
+        equipamentoSelecionado.fabricanteId = novoEquipamento.fabricanteId;
         equipamentoSelecionado.precoAquisicao = novoEquipamento.precoAquisicao;
         equipamentoSelecionado.dataFabricacao = novoEquipamento.dataFabricacao;
 

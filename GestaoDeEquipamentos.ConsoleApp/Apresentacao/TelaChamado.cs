@@ -6,7 +6,8 @@ namespace GestaoDeEquipamentos.ConsoleApp.Apresentacao;
 public class TelaChamado
 {
     public RepositorioChamado repositorioChamado = new RepositorioChamado();
-    public RepositorioEquipamento repositorioEquipamento = new RepositorioEquipamento();
+    public RepositorioEquipamento? repositorioEquipamento;
+    public RepositorioFabricante repositorioFabricante;
     public string? ObterEscolhaMenuPrincipal()
     {
         Console.Clear();
@@ -46,7 +47,7 @@ public class TelaChamado
 
             Console.WriteLine(
                 "{0, -7} | {1, -15} | {2, -15} | {3, -22} | {4, -10}",
-                e.id, e.nome, e.fabricante, e.precoAquisicao.ToString("C2"), e.dataFabricacao.ToShortDateString()
+                e.id, e.nome, repositorioFabricante.SelecionarPorId(e.fabricanteId ?? "")?.nome ?? "", e.precoAquisicao?.ToString("C2") ?? "", e.dataFabricacao?.ToShortDateString() ?? ""
             );
         }
 
@@ -129,7 +130,7 @@ public class TelaChamado
 
             Console.WriteLine(
                 "{0, -7} | {1, -30} | {2, -15} | {3, -22} | {4, -10}",
-                c.id, c.titulo, c.equipamento.nome, c.dataAbertura.ToShortDateString(), c.ObterDiasDecorridos()
+                c.id, c.titulo, c.equipamento?.nome ?? "", c.dataAbertura?.ToShortDateString() ?? "", c.ObterDiasDecorridos()
             );
         }
 
@@ -142,7 +143,13 @@ public class TelaChamado
             Console.Write("Digite o id do chamado que deseja editar: ");
             idSelecionado = Console.ReadLine();
 
-            if (!string.IsNullOrWhiteSpace(idSelecionado) && idSelecionado.Length == 7)
+            if (string.IsNullOrWhiteSpace(idSelecionado))
+            {
+                Console.Clear();
+                return;
+            }
+
+            if (idSelecionado.Length == 7)
                 break;
         } while (true);
 
@@ -217,7 +224,7 @@ public class TelaChamado
 
             Console.WriteLine(
                 "{0, -7} | {1, -30} | {2, -15} | {3, -22} | {4, -10}",
-                c.id, c.titulo, c.equipamento.nome, c.dataAbertura.ToShortDateString(), c.ObterDiasDecorridos()
+                c.id, c.titulo, c.equipamento?.nome ?? "", c.dataAbertura?.ToShortDateString() ?? "", c.ObterDiasDecorridos()
             );
         }
 
@@ -230,7 +237,13 @@ public class TelaChamado
             Console.Write("Digite o id do chamado que deseja excluir: ");
             idSelecionado = Console.ReadLine();
 
-            if (!string.IsNullOrWhiteSpace(idSelecionado) && idSelecionado.Length == 7)
+            if (string.IsNullOrWhiteSpace(idSelecionado))
+            {
+                Console.Clear();
+                return;
+            }
+
+            if (idSelecionado.Length == 7)
                 break;
         } while (true);
 
@@ -277,7 +290,7 @@ public class TelaChamado
 
             Console.WriteLine(
                 "{0, -7} | {1, -30} | {2, -15} | {3, -22} | {4, -10}",
-                c.id, c.titulo, c.equipamento.nome, c.dataAbertura.ToShortDateString(), c.ObterDiasDecorridos()
+                c.id, c.titulo, c.equipamento?.nome ?? "", c.dataAbertura?.ToShortDateString() ?? "", c.ObterDiasDecorridos()
             );
         }
 

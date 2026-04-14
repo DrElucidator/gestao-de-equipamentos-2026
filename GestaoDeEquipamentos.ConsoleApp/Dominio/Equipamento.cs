@@ -3,9 +3,9 @@ namespace GestaoDeEquipamentos.ConsoleApp.Dominio;
 
 public class Equipamento
 {
-    public string id;
-    public string nome;
-    public string fabricante;
-    public decimal precoAquisicao;
-    public DateTime dataFabricacao;   
+    public string? id { get; set; }
+    public string? nome { get; set; }
+    public string? fabricanteId { get; set; }
+    public decimal? precoAquisicao { get; set; }
+    public DateTime? dataFabricacao { get; set; }
 }
